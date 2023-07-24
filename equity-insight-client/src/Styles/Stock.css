@@ -1,0 +1,65 @@
+.tableContainer {
+    border-radius: 20px;
+    height: 600px;
+    padding: 0 10px 0 10px;
+    overflow: scroll;
+}
+
+.stockContainer {
+    padding: 50px;
+}
+
+table thead {
+    position: sticky;
+    top: 0px;
+    margin: 0 0 0 0;
+}
+
+.collapsible-table {
+    transition: max-height 0.15s ease-out;
+    max-height: 1000px; /* adjust as necessary */
+    border-radius: 20px;
+    height: 600px;
+    padding: 0 10px 0 10px;
+    overflow: scroll;
+}
+
+    .collapsible-table.collapsed {
+            max-height: 0;
+            overflow: hidden;
+    }
+
+.collapsible-header {
+    display: flex;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+    .collapsible-header:hover,
+    .collapsible-header:hover .arrow {
+        color: #555453; /* Change this to any color you like */
+        transform: scale(1.02);
+    }
+
+.collapsible-title{
+    padding-left: 2.5%;
+}
+
+.arrow {
+    transition: 0.3s ease;
+    margin-left: 10px;
+}
+
+    .arrow.collapsed {
+        transform: rotate(180deg);
+    }
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column-arrow{
+    margin-left: 20%;
+    color: gray;
+}
