@@ -1,38 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { ProfitabilityTable, LiquidityTable, SolvencyTable, EfficiencyTable } from './StockFinancialTables';
+import { ProfitabilityTable, LiquidityTable, SolvencyTable, EfficiencyTable, RecentFinancesTable } from './StockFinancialTables';
 import '../Styles/Stock.css'
+import { CustomizableChart } from './CustomizableChart';
+import { StockDetails } from '../InterfacesAndTypes';
 
-
-export interface FinancialData {
-    id: number;
-    assets: number;
-    cash: number;
-    cashAndCashEquivalentsAtCarryingValue: number;
-    earningsPerShareBasic: number;
-    earningsPerShareDiluted: number;
-    endDate: string;
-    grossProfit: number;
-    liabilities: number;
-    liabilitiesAndStockholdersEquity: number;
-    longTermDebt: number;
-    longTermDebtNoncurrent: number;
-    netIncomeLoss: number;
-    noncurrentAssets: number;
-    operatingIncomeLoss: number;
-    revenues: number;
-    salesRevenueNet: number;
-    shortTermInvestments: number;
-    stockHoldersEquity: number;
-}
-
-export interface StockDetails {
-    name: string;
-    ticker: string;
-    nextEarnings: string;
-    financialDatas: FinancialData[];
-}
 
 
 export default function Stock() {
@@ -57,10 +30,43 @@ export default function Stock() {
     return (
         <div className="stockContainer">
             <h1>{details.name} ({details.ticker})</h1>
-            <ProfitabilityTable financialDataList={details.financialDatas} />
-            <LiquidityTable financialDataList={details.financialDatas} />
-            <SolvencyTable financialDataList={details.financialDatas} />
-            <EfficiencyTable financialDataList={details.financialDatas} />
+            <div className="relevantAndTableContainer">
+                <div className="tableContainer">
+                    <div className="card">
+                        <div className="card-body">
+                            <ProfitabilityTable financialDataList={details.financialDatas} />
+                        </div>
+                    </div>
+                    <div className="card">
+                        <div className="card-body">
+                            <LiquidityTable financialDataList={details.financialDatas} />
+                        </div>
+                    </div>
+                    <div className="card">
+                        <div className="card-body">
+                            <SolvencyTable financialDataList={details.financialDatas} />
+                        </div>
+                    </div>
+                    <div className="card">
+                        <div className="card-body">
+                            <EfficiencyTable financialDataList={details.financialDatas} />
+                        </div>
+                    </div>
+                </div>
+                <div className="relevantContainer">
+                    <div className="card relevant-card">
+                        <div className="card-body">
+                            <h5 className="card-title">Most Recent Financials</h5>
+                            <RecentFinancesTable financialDataList={details.financialDatas} />
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div className="chartContainer">
+                <CustomizableChart financialDataList={details.financialDatas} />
+            </div>
         </div>
+            
     );
 }

@@ -1,12 +1,22 @@
-.tableContainer {
-    border-radius: 20px;
-    height: 600px;
-    padding: 0 10px 0 10px;
-    overflow: scroll;
-}
-
 .stockContainer {
     padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.relevantAndTableContainer {
+    display: flex;
+}
+
+.tableContainer {
+    border-radius: 20px;
+    padding: 0 10px 0 10px;
+    flex: 1;
+    min-width: 75%;
+}
+
+.relevantContainer {
+    flex: 2;
 }
 
 table thead {
@@ -62,4 +72,31 @@ table thead {
 .column-arrow{
     margin-left: 20%;
     color: gray;
+}
+
+.card {
+    margin: 10px auto;
+   
+}
+
+.relevant-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+    
+.recentFinancesRow {
+    border-bottom: 1px solid #ddd;
+}
+
+.recentFinancesProperty{
+    padding: 8px;
+    text-align: left;
+}
+
+.recentFinancesValue{
+    padding: 8px;
+    text-align: right;
+}
+
+.chartContainer{
+    margin-top: 50px;
 }

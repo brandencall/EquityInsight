@@ -1,59 +1,21 @@
 import React from 'react';
 import CollapsibleTable from './CollapsibleTable';
-import { FinancialData } from './Stock';
+import { createTableColumns } from '../FinancialProperties'
+import { FinancialTableProps } from '../InterfacesAndTypes';
+import { formatter } from '../CurrencyFormatter';
 
-interface FinancialTableProps {
-    financialDataList: FinancialData[]
-}
-
-export interface TableColumn {
-    header: string;
-    accessor: (data: FinancialData) => any;
-    property: keyof FinancialData;
-}
-
-const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-});
 
 export function ProfitabilityTable({ financialDataList }: FinancialTableProps) {
 
-    const columns: TableColumn[] = [
-        { header: 'Date', accessor: (data: FinancialData) => data.endDate, property: 'endDate' },
-        {
-            header: 'EPS Basic',
-            accessor: (data: FinancialData) => data.earningsPerShareBasic === 0 ? 'N/A' : data.earningsPerShareBasic,
-            property: 'earningsPerShareBasic'
-        },
-        {
-            header: 'EPS Diluted',
-            accessor: (data: FinancialData) => data.earningsPerShareDiluted === 0 ? 'N/A' : data.earningsPerShareDiluted,
-            property: 'earningsPerShareDiluted'
-        },
-        {
-            header: 'GrossProfit',
-            accessor: (data: FinancialData) => data.grossProfit === 0 ? 'N/A' : formatter.format(data.grossProfit),
-            property: 'grossProfit'
-        },
-        {
-            header: 'Net Income',
-            accessor: (data: FinancialData) => data.netIncomeLoss === 0 ? 'N/A' : formatter.format(data.netIncomeLoss),
-            property: 'netIncomeLoss'
-        },
-        {
-            header: 'Revenue',
-            accessor: (data: FinancialData) => data.revenues === 0 ? 'N/A' : formatter.format(data.revenues),
-            property: 'revenues'
-        },
-        {
-            header: 'Sales Net Revenue',
-            accessor: (data: FinancialData) => data.salesRevenueNet === 0 ? 'N/A' : formatter.format(data.salesRevenueNet),
-            property: 'salesRevenueNet'
-        },
-    ]
+    const columns = createTableColumns([
+        'endDate',
+        'earningsPerShareBasic',
+        'earningsPerShareDiluted',
+        'grossProfit',
+        'netIncomeLoss',
+        'revenues',
+        'salesRevenueNet'
+    ])
 
     return (
         <CollapsibleTable
@@ -67,36 +29,15 @@ export function ProfitabilityTable({ financialDataList }: FinancialTableProps) {
 
 export function LiquidityTable({ financialDataList }: FinancialTableProps) {
 
-   
 
-    const columns: TableColumn[] = [
-        { header: 'Date', accessor: (data: FinancialData) => data.endDate, property: 'endDate' },
-        {
-            header: 'Cash',
-            accessor: (data: FinancialData) => data.cash === 0 ? 'N/A' : formatter.format(data.cash),
-            property: 'cash'
-        },
-        {
-            header: 'CashAndCashEquivalents',
-            accessor: (data: FinancialData) => data.cashAndCashEquivalentsAtCarryingValue === 0 ? 'N/A' : formatter.format(data.cashAndCashEquivalentsAtCarryingValue),
-            property: 'cashAndCashEquivalentsAtCarryingValue'
-        },
-        {
-            header: 'Assets',
-            accessor: (data: FinancialData) => data.assets === 0 ? 'N/A' : formatter.format(data.assets),
-            property: 'assets'
-        },
-        {
-            header: 'Liabilities',
-            accessor: (data: FinancialData) => data.liabilities === 0 ? 'N/A' : formatter.format(data.liabilities),
-            property: 'liabilities'
-        },
-        {
-            header: 'Short Term Investments',
-            accessor: (data: FinancialData) => data.shortTermInvestments === 0 ? 'N/A' : formatter.format(data.shortTermInvestments),
-            property: 'shortTermInvestments'            
-        },
-    ]
+    const columns = createTableColumns([
+        'endDate',
+        'cash',
+        'cashAndCashEquivalentsAtCarryingValue',
+        'assets',
+        'liabilities',
+        'shortTermInvestments',
+    ])
 
     return (
         <CollapsibleTable
@@ -110,39 +51,16 @@ export function LiquidityTable({ financialDataList }: FinancialTableProps) {
 
 export function SolvencyTable({ financialDataList }: FinancialTableProps) {
 
-    const columns: TableColumn[] = [
-        { header: 'Date', accessor: (data: FinancialData) => data.endDate, property: 'endDate' },
-        {
-            header: 'Assets',
-            accessor: (data: FinancialData) => data.assets === 0 ? 'N/A' : formatter.format(data.assets),
-            property: 'assets'
-        },
-        {
-            header: 'Noncurrent Assets',
-            accessor: (data: FinancialData) => data.noncurrentAssets === 0 ? 'N/A' : formatter.format(data.noncurrentAssets),
-            property: 'noncurrentAssets'
-        },
-        {
-            header: 'Liabilities',
-            accessor: (data: FinancialData) => data.liabilities === 0 ? 'N/A' : formatter.format(data.liabilities),
-            property: 'liabilities'
-        },
-        {
-            header: 'Long Term Debt',
-            accessor: (data: FinancialData) => data.longTermDebt === 0 ? 'N/A' : formatter.format(data.longTermDebt),
-            property: 'longTermDebt'
-        },
-        {
-            header: 'Long Term Debt Noncurrent',
-            accessor: (data: FinancialData) => data.longTermDebtNoncurrent === 0 ? 'N/A' : formatter.format(data.longTermDebtNoncurrent),
-            property:'longTermDebtNoncurrent'
-        },
-        {
-            header: 'Stockholders Equity',
-            accessor: (data: FinancialData) => data.stockHoldersEquity === 0 ? 'N/A' : formatter.format(data.stockHoldersEquity),
-            property: 'stockHoldersEquity'
-        },
-    ]
+  
+    const columns = createTableColumns([
+        'endDate',
+        'assets',
+        'noncurrentAssets',
+        'liabilities',
+        'longTermDebt',
+        'longTermDebtNoncurrent',
+        'stockHoldersEquity',
+    ])
 
     return (
         <CollapsibleTable
@@ -156,29 +74,14 @@ export function SolvencyTable({ financialDataList }: FinancialTableProps) {
 
 export function EfficiencyTable({ financialDataList }: FinancialTableProps) {
 
-    const columns: TableColumn[] = [
-        { header: 'Date', accessor: (data: FinancialData) => data.endDate, property: 'endDate' },
-        {
-            header: 'Sales Net Revenue',
-            accessor: (data: FinancialData) => data.salesRevenueNet === 0 ? 'N/A' : formatter.format(data.salesRevenueNet),
-            property: 'salesRevenueNet'
-        },
-        {
-            header: 'Operating Income',
-            accessor: (data: FinancialData) => data.operatingIncomeLoss === 0 ? 'N/A' : formatter.format(data.operatingIncomeLoss),
-            property: 'operatingIncomeLoss'
-        },
-        {
-            header: 'Assets',
-            accessor: (data: FinancialData) => data.assets === 0 ? 'N/A' : formatter.format(data.assets),
-            property:'assets'
-        },
-        {
-            header: 'StockholdersEquity',
-            accessor: (data: FinancialData) => data.stockHoldersEquity === 0 ? 'N/A' : formatter.format(data.stockHoldersEquity),
-            property: 'stockHoldersEquity'
-        }
-    ]
+ 
+    const columns = createTableColumns([
+        'endDate',
+        'salesRevenueNet',
+        'operatingIncomeLoss',
+        'assets',
+        'stockHoldersEquity',
+    ])
 
     return (
         <CollapsibleTable
@@ -187,5 +90,37 @@ export function EfficiencyTable({ financialDataList }: FinancialTableProps) {
             title="Efficiency Metrics"
             notOpen={true}
         />
+    )
+}
+
+export function RecentFinancesTable({ financialDataList }: FinancialTableProps) {
+
+    if (financialDataList.length === 0) return null; // handle empty list
+
+    const mostRecentData = financialDataList[0];
+
+    const columns = createTableColumns([
+        'earningsPerShareBasic',
+        'grossProfit',
+        'netIncomeLoss',
+        'assets',
+        'liabilities',
+    ])
+
+    return (
+        <table>
+            <tbody>
+                {columns.map((column, index) => (
+                    <tr key={index} className="recentFinancesRow">
+                        <td className="recentFinancesProperty">{column.header}</td>
+                        <td className="recentFinancesValue">{
+                            typeof column.accessor(mostRecentData) === "number" && column.property !== "earningsPerShareBasic"
+                                ? formatter.format(column.accessor(mostRecentData))
+                                : column.accessor(mostRecentData)
+                        }</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
     )
 }

@@ -1,26 +1,11 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { FinancialData } from './Stock';
-import { TableColumn } from './StockFinancialTables'
-
-type SortDirection = 'asc' | 'desc';
-
-type SortConfig = {
-    key: keyof FinancialData;
-    direction: SortDirection;
-}
-
-interface TableProps {
-    data: FinancialData[];
-    columns: TableColumn[];
-    title: string;
-    notOpen: boolean;
-}
+import { TableProps, FinancialData, SortConfig, SortDirection } from '../InterfacesAndTypes';
+import { formatter } from '../CurrencyFormatter';
 
 export default function CollapsibleTable({ data, columns, title, notOpen }: TableProps) {
    
     const [isCollapsed, setIsCollapsed] = useState(notOpen);
     const [sortedData, setSortedData] = useState<FinancialData[]>(data);
-    const [sortField, setSortField] = useState<string | null>(null);
     const [sortConfig, setSortConfig] = useState<SortConfig | null>(null);
 
     useEffect(() => {
@@ -74,7 +59,11 @@ export default function CollapsibleTable({ data, columns, title, notOpen }: Tabl
                             {sortedData.map((item, index) => (
                                 <tr key={index}>
                                     {columns.map((column, index) => (
-                                        <td key={index}>{column.accessor(item)}</td>
+                                        <td key={index}>{                                           
+                                            typeof column.accessor(item) === "number" && column.property !== "earningsPerShareBasic" && column.property !== "earningsPerShareDiluted"
+                                                ? formatter.format(column.accessor(item))
+                                                : column.accessor(item)
+                                        }</td>
                                     ))}
                                 </tr>
                             ))}
