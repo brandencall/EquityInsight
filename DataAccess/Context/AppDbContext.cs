@@ -14,9 +14,10 @@ namespace DataAccess.Context
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
         { }
-        public DbSet<Models.FinancialData> CompanyFinancialData { get; set; } = default!;
+        public DbSet<FinancialData> CompanyFinancialData { get; set; } = default!;
 
-        public DbSet<Models.Company> Companies { get; set; } = default!;
+        public DbSet<Company> Companies { get; set; } = default!;
+        public DbSet<User> User { get; set; } = default!;
         /// <summary>
         /// Override method to be able to configure the different models in entity framework.
         /// Uses Fluent API methods to validate the data before inserting into the Database.

@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#Exclude the appsettings.json file for our backend.
+/WebAPI/appsettings.json
+
+
 # User-specific files
 *.rsuser
 *.suo
